@@ -37,3 +37,5 @@ const counter1Slice = createSlice({
 
 export const counter1Reducer = counter1Slice.reducer
 export const {decrement, incrementRand} = counter1Slice.actions
+
+//todo: incrementRand есть в слайсе 1 и 2; у каждого свой. могут ли быть случаи конфликта
