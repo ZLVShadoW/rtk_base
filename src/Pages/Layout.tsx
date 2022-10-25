@@ -8,7 +8,7 @@ export const Layout = () => {
                 <nav>
                     <ul style={{display: 'flex', gap: 16, listStyle: 'none', padding: 0, margin: 0}}>
                         <li><Link to={'/'}>Main</Link></li>
-                        <li><Link to={'counter'}>Counter</Link></li>
+                        <li><Link to={'counters'}>Counter</Link></li>
                         <li><Link to={'pokemons'}>Pokemons</Link></li>
                     </ul>
                 </nav>

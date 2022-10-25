@@ -4,14 +4,14 @@ import '../App.css';
 import {Layout} from '../Pages/Layout';
 import {Main} from '../Pages/Main';
 import {Pokemons} from '../Pages/Pokemons';
-import {Counter} from '../Pages/Counter';
+import {Counters} from '../Pages/Counters';
 
 export const App = () => {
     return (
         <Routes>
             <Route path={'/'} element={<Layout/>}>
                 <Route index element={<Main/>}/>
-                <Route path={'counter'} element={<Counter/>}/>
+                <Route path={'counters'} element={<Counters/>}/>
                 <Route path={'pokemons'} element={<Pokemons/>}/>
             </Route>
         </Routes>
