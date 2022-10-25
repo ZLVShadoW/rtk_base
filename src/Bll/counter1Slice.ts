@@ -1,4 +1,5 @@
 import {createAction, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {reset} from './action';
 
 export const increment = createAction('counter1/increment')
 
@@ -11,7 +12,7 @@ const counter1Slice = createSlice({
         decrement: (state) => {
             state.count = state.count - 1
         },
-        incrementRand: (state, action: PayloadAction<{number: number}>) => {
+        incrementRand: (state, action: PayloadAction<{ number: number }>) => {
             state.count += action.payload.number
         }
     },
@@ -27,6 +28,9 @@ const counter1Slice = createSlice({
         // },
         [increment.type]: (state) => {
             state.count = state.count + 1
+        },
+        [reset.type]: state => {
+            state.count = 0
         }
     }
 })

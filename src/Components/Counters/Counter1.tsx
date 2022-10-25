@@ -1,6 +1,7 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/typedRTKHooks';
 import {decrement, increment, incrementRand} from '../../Bll/counter1Slice';
+import { randomLimitNumber } from './utils';
 
 export const Counter1 = () => {
     const dispatch = useAppDispatch()
@@ -14,11 +15,11 @@ export const Counter1 = () => {
     }
 
     const incRand = () => {
-        dispatch(incrementRand({number: randomLimitNumber(1, 10)}))
+        dispatch(incrementRand({number: randomLimitNumber(1, 3)}))
     }
 
     return (
-        <div>
+        <div style={{padding: 16, border: '1px solid #eee'}}>
             <div>{result}</div>
             <div>
                 <button onClick={dec}>dec</button>
@@ -28,9 +29,3 @@ export const Counter1 = () => {
         </div>
     );
 };
-
-// --- for utils/helpers
-
-const randomLimitNumber = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
