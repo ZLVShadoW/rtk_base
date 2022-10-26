@@ -1,24 +1,33 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {ApiPokemons, PokemonsRequest} from '../api/api';
+import {ApiPokemons, NullableType, PokemonsRequest} from '../api/api';
 import {AxiosError} from 'axios';
 
-export const getAllPokemons = createAsyncThunk('pokemons/getAllPokemons', async (
-    _) => {
+export const getAllPokemons = createAsyncThunk<PokemonsRequest, void, {rejectValue: string}>('pokemons/getAllPokemons', async (
+    _, {rejectWithValue}) => {
     try {
         const res = await ApiPokemons.getPokemons()
         return res.data
     } catch (e) {
         const err = e as AxiosError
         console.log('e: ', err.message)
+        return rejectWithValue(err.message)
     }
 })
 
-const initialState: PokemonsRequest & { loading: 'idle' | 'loading' } = {
+type LoadingStatusType = 'idle' | 'loading'
+
+type InitialSliceStateType = PokemonsRequest & {
+    loading: LoadingStatusType
+    errorMes: NullableType<string>
+}
+
+const initialState: InitialSliceStateType = {
     count: 0,
     next: '',
     previous: null,
     results: [],
     loading: 'idle',
+    errorMes: null
 }
 
 const pokemonsSlice = createSlice({
@@ -29,13 +38,22 @@ const pokemonsSlice = createSlice({
         builder
             .addCase(getAllPokemons.pending, (state) => {
                 state.loading = 'loading'
+                state.errorMes = null
             })
             .addCase(getAllPokemons.fulfilled, (state, action) => {
-                return action.payload ? {
-                    ...action.payload,
-                    loading: 'idle'
-                } : {} as PokemonsRequest & { loading: 'idle' | 'loading' }
+                // state.loading = 'idle'
+                return {...state, loading: 'idle', ...action.payload}
             })
+            .addCase(getAllPokemons.rejected, (state, action) => {
+                state.errorMes = action.payload ? action.payload : null
+                state.loading = 'idle'
+            })
+            // .addCase(getAllPokemons.fulfilled, (state, action) => {
+            //     return action.payload ? {
+            //         ...action.payload,
+            //         loading: 'idle'
+            //     } : {} as PokemonsRequest & { loading: 'idle' | 'loading' }
+            // })
     }
 })
 
