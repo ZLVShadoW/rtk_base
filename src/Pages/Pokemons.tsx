@@ -1,6 +1,7 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from '../hooks/typedRTKHooks';
 import {getAllPokemons} from '../Bll/pokemonsSlice';
+import {PokemonItem} from '../Components/PokemonItem/PokemonItem';
 
 export const Pokemons = () => {
     const dispatch = useAppDispatch()
@@ -19,7 +20,7 @@ export const Pokemons = () => {
                 <div>LOADING ... </div>
                 : <div>
                     {pokemons
-                        ? pokemons.map(el => (<div key={el.name}>{el.name}</div>))
+                        ? pokemons.map(el => <PokemonItem key={el.name} {...el} />)
                         : []}
                 </div>
             }
