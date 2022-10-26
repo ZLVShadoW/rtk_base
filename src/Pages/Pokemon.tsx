@@ -12,6 +12,7 @@ export const Pokemon = () => {
 
     React.useEffect(() => {
         dispatch(getPokemon(idp!))
+
         return () => {
             dispatch(clearPokemon())
         }

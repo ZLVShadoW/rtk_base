@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, Outlet} from 'react-router-dom';
+import {PATH} from './constRoutes';
 
 export const Layout = () => {
     return (
@@ -8,8 +9,8 @@ export const Layout = () => {
                 <nav>
                     <ul style={{display: 'flex', gap: 16, listStyle: 'none', padding: 0, margin: 0}}>
                         <li><Link to={'/'}>Main</Link></li>
-                        <li><Link to={'counters'}>Counter</Link></li>
-                        <li><Link to={'pokemons'}>Pokemons</Link></li>
+                        <li><Link to={PATH.COUNTERS}>Counter</Link></li>
+                        <li><Link to={PATH.POKEMONS}>Pokemons</Link></li>
                     </ul>
                 </nav>
             </header>

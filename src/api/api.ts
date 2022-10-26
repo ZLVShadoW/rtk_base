@@ -10,8 +10,8 @@ export const ApiPokemons = {
     getPokemons() {
         return instance.get<PokemonsRequest>('pokemon')
     },
-    getPokemon(url: string) {
-        return instance.get<Pokemon>('pokemon/' + url)
+    getPokemon(urlId: string) {
+        return instance.get<Pokemon>('pokemon/' + urlId)
     }
 }
 
