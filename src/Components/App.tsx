@@ -8,6 +8,7 @@ import {Counters} from '../Pages/Counters';
 import { Pokemon } from '../Pages/Pokemon';
 import {Error} from '../Pages/Error';
 import {PATH} from '../Pages/constRoutes';
+import {Rend} from '../renderFunc/Rend';
 
 export const App = () => {
     return (
@@ -18,6 +19,7 @@ export const App = () => {
                 <Route path={PATH.POKEMONS} element={<Pokemons/>}/>
                 <Route path={PATH.POKEMONS + '/:idp'} element={<Pokemon/>}/>
                 <Route path={PATH.ERROR} element={<Error/>}/>
+                <Route path={'rend'} element={<Rend/>}/>
                 <Route path={'*'} element={<Navigate to={'404'} />}/>
             </Route>
         </Routes>
