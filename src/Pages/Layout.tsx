@@ -14,6 +14,8 @@ export const Layout = () => {
                         <li><NavLink style={activeClass} to={'/'} end >Main</NavLink></li>
                         <li><NavLink style={activeClass} to={PATH.COUNTERS}>Counter</NavLink></li>
                         <li><NavLink style={activeClass} to={PATH.POKEMONS}>Pokemons</NavLink></li>
+                        <li><NavLink style={activeClass} to={PATH.RENDER}>Render</NavLink></li>
+                        <li><NavLink style={activeClass} to={PATH.DRAG_N_DROP}>Drag'n'Drop</NavLink></li>
                     </ul>
                 </nav>
             </header>

@@ -5,10 +5,11 @@ import {Layout} from '../Pages/Layout';
 import {Main} from '../Pages/Main';
 import {Pokemons} from '../Pages/Pokemons';
 import {Counters} from '../Pages/Counters';
-import { Pokemon } from '../Pages/Pokemon';
+import {Pokemon} from '../Pages/Pokemon';
 import {Error} from '../Pages/Error';
 import {PATH} from '../Pages/constRoutes';
-import {Rend} from '../renderFunc/Rend';
+import {Render} from '../Pages/Render';
+import {DragNDrop} from '../Pages/DragNDrop';
 
 export const App = () => {
     return (
@@ -19,8 +20,9 @@ export const App = () => {
                 <Route path={PATH.POKEMONS} element={<Pokemons/>}/>
                 <Route path={PATH.POKEMONS + '/:idp'} element={<Pokemon/>}/>
                 <Route path={PATH.ERROR} element={<Error/>}/>
-                <Route path={'rend'} element={<Rend/>}/>
-                <Route path={'*'} element={<Navigate to={'404'} />}/>
+                <Route path={PATH.RENDER} element={<Render/>}/>
+                <Route path={PATH.DRAG_N_DROP} element={<DragNDrop/>}/>
+                <Route path={'*'} element={<Navigate to={'404'}/>}/>
             </Route>
         </Routes>
     );
