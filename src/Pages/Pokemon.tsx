@@ -6,17 +6,17 @@ import {clearPokemon, getPokemon} from '../Bll/pokemonSlice';
 export const Pokemon = () => {
     const dispatch = useAppDispatch()
 
-    const {idp} = useParams()
+    const {pid} = useParams()
 
     const {id, name, sprites, weight} = useAppSelector(state => state.pokemon)
 
     React.useEffect(() => {
-        dispatch(getPokemon(idp!))
+        dispatch(getPokemon(pid!))
 
         return () => {
             dispatch(clearPokemon())
         }
-    }, [dispatch, idp])
+    }, [dispatch, pid])
 
     return (
         <div>

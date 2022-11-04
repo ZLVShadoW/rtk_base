@@ -10,6 +10,7 @@ import {Error} from '../Pages/Error';
 import {PATH} from '../Pages/constRoutes';
 import {Render} from '../Pages/Render';
 import {DragNDrop} from '../Pages/DragNDrop';
+import {First} from './DragNDropPractice/1_Steps';
 
 export const App = () => {
     return (
@@ -18,10 +19,15 @@ export const App = () => {
                 <Route index element={<Main/>}/>
                 <Route path={PATH.COUNTERS} element={<Counters/>}/>
                 <Route path={PATH.POKEMONS} element={<Pokemons/>}/>
-                <Route path={PATH.POKEMONS + '/:idp'} element={<Pokemon/>}/>
+                <Route path={PATH.POKEMONS + '/:pid'} element={<Pokemon/>}/>
                 <Route path={PATH.ERROR} element={<Error/>}/>
                 <Route path={PATH.RENDER} element={<Render/>}/>
-                <Route path={PATH.DRAG_N_DROP} element={<DragNDrop/>}/>
+                <Route path={PATH.DRAG_N_DROP} element={<DragNDrop/>} >
+                    <Route index element={<div>Chose</div>}/>
+                    <Route path={'first'} element={<First/>}/>
+                    <Route path={'second'} element={<div>1</div>}/>
+                    <Route path={'third'} element={<div>12</div>}/>
+                </Route>
                 <Route path={'*'} element={<Navigate to={'404'}/>}/>
             </Route>
         </Routes>

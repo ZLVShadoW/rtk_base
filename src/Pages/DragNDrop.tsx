@@ -1,44 +1,25 @@
 import React from 'react';
+import {NavLink, Outlet} from 'react-router-dom';
 
 export const DragNDrop = () => {
-let dr: Element
-    const onDragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {
-        dr = e.currentTarget
-    }
-
-    const onDragEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-    }
-
-    const onDragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        e.currentTarget.style.background = '#ccc'
-    }
-
-    const onDropHandler = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        e.currentTarget.appendChild(dr)
-        e.currentTarget.style.background = '#eee'
-        dr.setAttribute('draggable', 'false')
-    }
 
     return (
-        <>
-            <div style={{background: '#eee', padding: 10, margin: 10}}>
-                <div onDragStart={onDragStartHandler}
-                     onDragEnd={onDragEndHandler}
-                     draggable={true}
-                >
-                    Lorem ipsum dolor sit amet, consectetur adipisicing.
-                </div>
+        <div style={{display: 'flex', gap: 20}}>
+            <div style={{
+                width: '250px',
+                borderRight: '1px solid #ccc',
+                paddingRight: 10
+            }}>
+                <ul>
+                    <li><NavLink to={'first'}>First</NavLink></li>
+                    <li><NavLink to={'second'}>Second</NavLink></li>
+                    <li><NavLink to={'third'}>Third</NavLink></li>
+                </ul>
             </div>
 
-            <div style={{background: '#eee', padding: 30, margin: 10}}
-                 onDragOver={onDragOverHandler}
-                 onDrop={onDropHandler}
-            >
-                zcxzczc
+            <div style={{flexGrow: 1}}>
+                <Outlet/>
             </div>
-        </>
+        </div>
     );
 };

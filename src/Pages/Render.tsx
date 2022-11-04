@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Rend1} from '../renderFunc/rend1';
-import {Rend2} from '../renderFunc/rend2';
+import {Rend1} from '../Components/renderComponents/rend1';
+import {Rend2} from '../Components/renderComponents/rend2';
 
 const Comp: {
     [key: string]: ({
