@@ -30,11 +30,10 @@ export const First = () => {
         e.currentTarget.style.background = '#eee'
     }
 
-    console.log('rendered')
-
     return (
         <>
             <h2>First</h2>
+
             <div style={{background: '#eee', padding: 10, margin: 10}}>
                 <div onDragStart={onDragStartHandler}
                      onDragEnd={onDragEndHandler}
@@ -48,7 +47,6 @@ export const First = () => {
             <div style={{background: '#eee', padding: 30, margin: 10}}
                  onDragOver={onDragOverHandler}
                  onDrop={onDropHandler}
-
                  onDragLeave={onDragLeaveHandler}
             >
                 Lorem ipsum dolor sit amet.

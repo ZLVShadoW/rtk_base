@@ -11,6 +11,7 @@ import {PATH} from '../Pages/constRoutes';
 import {Render} from '../Pages/Render';
 import {DragNDrop} from '../Pages/DragNDrop';
 import {First} from './DragNDropPractice/1_Steps';
+import {Second} from './DragNDropPractice/2_Steps';
 
 export const App = () => {
     return (
@@ -25,7 +26,7 @@ export const App = () => {
                 <Route path={PATH.DRAG_N_DROP} element={<DragNDrop/>} >
                     <Route index element={<div>Chose</div>}/>
                     <Route path={'first'} element={<First/>}/>
-                    <Route path={'second'} element={<div>1</div>}/>
+                    <Route path={'second'} element={<Second/>}/>
                     <Route path={'third'} element={<div>12</div>}/>
                 </Route>
                 <Route path={'*'} element={<Navigate to={'404'}/>}/>
