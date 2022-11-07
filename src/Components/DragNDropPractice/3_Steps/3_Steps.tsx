@@ -39,7 +39,10 @@ export const Third = () => {
         e.preventDefault()
     }
 
-    const onDropHandler = (e: React.DragEvent<HTMLDivElement>, params: { group: GroupType, item: ItemType }) => {
+    const onDropHandler = (
+        e: React.DragEvent<HTMLDivElement>,
+        params: { group: GroupType, item: ItemType }
+    ) => {
         e.preventDefault()
 
         setItems(prevState => {
@@ -58,18 +61,41 @@ export const Third = () => {
         setCurrentGroup(null)
     }
 
+    const onDropGroupHandler = (
+        e: React.DragEvent<HTMLDivElement>, params: { group: GroupType }) => {
+        e.preventDefault()
+
+        if (!items[params.group.id].length) {
+            setItems(prevState => {
+                let newItemsGroup: ItemsGroupType = JSON.parse(JSON.stringify(prevState))
+
+                const crtItemIdx = newItemsGroup[currentGroup!.id].findIndex(item => item.id === currentItem!.id)
+
+                newItemsGroup[currentGroup!.id].splice(crtItemIdx, 1)
+                newItemsGroup[params.group.id].push(currentItem!)
+
+                return newItemsGroup
+            })
+        }
+
+        setCurrentGroup(null)
+    }
+
     return (
         <div className={styles.groups}>
 
             {groups.map(group => {
                 return (
-                    <div key={group.id} className={styles.group}>
+                    <div key={group.id} className={styles.group}
+                         onDragOver={onDragOverHandler}
+                         onDrop={(e) => onDropGroupHandler(e, {group})}
+                    >
                         <h3 className={styles.h3}>{group.title}</h3>
 
                         {items[group.id].map(item => {
                             return (
                                 <div key={item.id}
-                                     // className={styles.item}
+                                    // className={styles.item}
                                      className={(currentItem && currentItem.id === item.id) && (currentGroup && currentGroup.id === group.id) ? `${styles.item} ${styles.current}` : styles.item}
                                      draggable={true}
                                      onDragStart={(e) => onDragStartHandler(e, {
