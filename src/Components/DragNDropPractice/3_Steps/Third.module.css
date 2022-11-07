@@ -1,6 +1,7 @@
 .groups {
     display: flex;
     gap: 10px;
+    align-items: start;
 }
 .group {
     border: 1px solid #ccc;
@@ -8,9 +9,18 @@
     background: #eee;
 }
 
+.h3 {
+    margin: 0 0 16px 0;
+}
+
 .item {
     background: #fff;
     padding: 10px 16px;
+    cursor: grab;
+}
+
+.item.current {
+    background: #82dff8;
 }
 
 .item:not(:last-child) {
