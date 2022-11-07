@@ -19,6 +19,7 @@ export const Second = () => {
 
     const onDragStartHandler = (e: React.DragEvent<HTMLDivElement>, card: CardType) => {
         setCurrentCard(card)
+        e.currentTarget.style.background = '#ccc'
     }
 
     const onDragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
@@ -27,7 +28,7 @@ export const Second = () => {
 
     const onDropHandler = (e: React.DragEvent<HTMLDivElement>, card: CardType) => {
         e.preventDefault()
-        e.currentTarget.style.background = 'none'
+        e.currentTarget.style.removeProperty('background')
 
         let currentCardIdx = cards.findIndex(crd => crd.id === (currentCard && currentCard.id))
         let cardIdx = cards.findIndex(crd => crd.id === card.id)
@@ -45,6 +46,7 @@ export const Second = () => {
 
             return newArr
         })
+        // setCurrentCard(null)
     }
 
     const onDragEnterHandler = (e: React.DragEvent<HTMLDivElement>) => {
@@ -52,7 +54,7 @@ export const Second = () => {
     }
 
     const onDragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
-        e.currentTarget.style.background = 'none'
+        e.currentTarget.style.removeProperty('background')
     }
 
     return (
@@ -66,7 +68,8 @@ export const Second = () => {
                              style={{
                                  padding: '50px 30px',
                                  border: '1px solid #ddd',
-                                 cursor: 'grab'
+                                 cursor: 'grab',
+                                 opacity: currentCard && currentCard.id === card.id ? '0.85' : '1'
                              }}
 
                              onDragStart={(e) => onDragStartHandler(e, card)}
@@ -74,6 +77,8 @@ export const Second = () => {
                              onDrop={(e) => onDropHandler(e, card)}
                              onDragEnter={onDragEnterHandler}
                              onDragLeave={onDragLeaveHandler}
+
+                             onDragEnd={() => {setCurrentCard(null)}}
                         >
                             {card.text}
                         </div>

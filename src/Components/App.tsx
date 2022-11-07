@@ -12,6 +12,7 @@ import {Render} from '../Pages/Render';
 import {DragNDrop} from '../Pages/DragNDrop';
 import {First} from './DragNDropPractice/1_Steps';
 import {Second} from './DragNDropPractice/2_Steps';
+import {Third} from './DragNDropPractice/3_Steps/3_Steps';
 
 export const App = () => {
     return (
@@ -27,7 +28,7 @@ export const App = () => {
                     <Route index element={<div>Chose</div>}/>
                     <Route path={'first'} element={<First/>}/>
                     <Route path={'second'} element={<Second/>}/>
-                    <Route path={'third'} element={<div>12</div>}/>
+                    <Route path={'third'} element={<Third/>}/>
                 </Route>
                 <Route path={'*'} element={<Navigate to={'404'}/>}/>
             </Route>

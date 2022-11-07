@@ -1,0 +1,18 @@
+.groups {
+    display: flex;
+    gap: 10px;
+}
+.group {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #eee;
+}
+
+.item {
+    background: #fff;
+    padding: 10px 16px;
+}
+
+.item:not(:last-child) {
+    margin-bottom: 10px;
+}
