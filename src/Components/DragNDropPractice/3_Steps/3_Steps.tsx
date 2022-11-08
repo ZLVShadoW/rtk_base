@@ -65,21 +65,43 @@ export const Third = () => {
         e: React.DragEvent<HTMLDivElement>, params: { group: GroupType }) => {
         e.preventDefault()
 
-        if (!items[params.group.id].length) {
-            setItems(prevState => {
-                let newItemsGroup: ItemsGroupType = JSON.parse(JSON.stringify(prevState))
+        if (currentItem) {
+            if (!items[params.group.id].length) {
+                setItems(prevState => {
+                    let newItemsGroup: ItemsGroupType = JSON.parse(JSON.stringify(prevState))
 
-                const crtItemIdx = newItemsGroup[currentGroup!.id].findIndex(item => item.id === currentItem!.id)
+                    const crtItemIdx = newItemsGroup[currentGroup!.id].findIndex(item => item.id === currentItem!.id)
 
-                newItemsGroup[currentGroup!.id].splice(crtItemIdx, 1)
-                newItemsGroup[params.group.id].push(currentItem!)
+                    newItemsGroup[currentGroup!.id].splice(crtItemIdx, 1)
+                    newItemsGroup[params.group.id].push(currentItem!)
 
-                return newItemsGroup
+                    return newItemsGroup
+                })
+            }
+        } else {
+            setGroups(prevState => {
+                let copyGroup: Array<GroupType> = JSON.parse(JSON.stringify(prevState))
+
+                const crtGrIdx = copyGroup.findIndex(gr => gr.id === currentGroup!.id)
+                const grIdx = copyGroup.findIndex(gr => gr.id === params.group.id)
+
+                copyGroup.splice(grIdx, 0, copyGroup.splice(crtGrIdx, 1)[0])
+
+                return copyGroup
             })
         }
 
+        setCurrentItem(null)
         setCurrentGroup(null)
     }
+
+    const onDragStartGroupHandler = (
+        e: React.DragEvent<HTMLDivElement>, group: GroupType) => {
+        setCurrentGroup(group)
+    }
+
+    console.log('gr', currentGroup)
+    console.log('item', currentItem)
 
     return (
         <div className={styles.groups}>
@@ -87,6 +109,8 @@ export const Third = () => {
             {groups.map(group => {
                 return (
                     <div key={group.id} className={styles.group}
+                         draggable={true}
+                         onDragStart={(e) => onDragStartGroupHandler(e, group)}
                          onDragOver={onDragOverHandler}
                          onDrop={(e) => onDropGroupHandler(e, {group})}
                     >
