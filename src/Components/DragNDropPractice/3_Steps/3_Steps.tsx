@@ -44,18 +44,20 @@ export const Third = () => {
         params: { group: GroupType, item: ItemType }
     ) => {
         e.preventDefault()
+        e.currentTarget.classList.remove(`${styles.current}`)
+        if (currentItem) {
+            setItems(prevState => {
+                let newItemsGroup: ItemsGroupType = JSON.parse(JSON.stringify(prevState))
 
-        setItems(prevState => {
-            let newItemsGroup: ItemsGroupType = JSON.parse(JSON.stringify(prevState))
+                const crtItemIdx = newItemsGroup[currentGroup!.id].findIndex(item => item.id === currentItem!.id)
+                const itIdx = newItemsGroup[params.group.id].findIndex(item => item.id === params.item.id)
 
-            const crtItemIdx = newItemsGroup[currentGroup!.id].findIndex(item => item.id === currentItem!.id)
-            const itIdx = newItemsGroup[params.group.id].findIndex(item => item.id === params.item.id)
+                newItemsGroup[currentGroup!.id].splice(crtItemIdx, 1)
+                newItemsGroup[params.group.id].splice(itIdx, 0, currentItem!)
 
-            newItemsGroup[currentGroup!.id].splice(crtItemIdx, 1)
-            newItemsGroup[params.group.id].splice(itIdx, 0, currentItem!)
-
-            return newItemsGroup
-        })
+                return newItemsGroup
+            })
+        }
 
         setCurrentItem(null)
         setCurrentGroup(null)
@@ -100,8 +102,9 @@ export const Third = () => {
         setCurrentGroup(group)
     }
 
-    console.log('gr', currentGroup)
-    console.log('item', currentItem)
+    const onDragEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        setCurrentItem(null)
+    }
 
     return (
         <div className={styles.groups}>
@@ -128,6 +131,8 @@ export const Third = () => {
                                      })}
                                      onDragOver={onDragOverHandler}
                                      onDrop={(e) => onDropHandler(e, {group, item})}
+
+                                     onDragEnd={onDragEndHandler}
                                 >
                                     {item.text}
                                 </div>
